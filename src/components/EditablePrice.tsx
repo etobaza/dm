@@ -75,6 +75,7 @@ export function EditablePrice({ currentPrice, isOffsale, onPriceChange, isEditin
   };
 
   const handleConfirm = async () => {
+    if (isLoading) return; 
     const trimmedValue = inputValue.trim();
     const newPrice = trimmedValue === '' ? null : parseInt(trimmedValue, 10);
     setIsLoading(true);
@@ -164,6 +165,7 @@ export function EditablePrice({ currentPrice, isOffsale, onPriceChange, isEditin
         onCancel={handleCancel}
         confirmText={isLoading ? 'Updating...' : 'Confirm'}
         type={inputValue.trim() === '' ? 'warning' : 'info'}
+        confirmOnEnter
       >
         <div className="price-comparison">
           <div className="price-item">

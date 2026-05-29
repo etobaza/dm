@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import '../styles/components/confirm-modal.css';
 
@@ -11,6 +12,7 @@ interface ConfirmModalProps {
   onCancel: () => void;
   type?: 'info' | 'warning' | 'danger';
   showCancel?: boolean;
+  confirmOnEnter?: boolean;
   children?: React.ReactNode;
 }
 
@@ -24,8 +26,27 @@ export function ConfirmModal({
   onCancel,
   type = 'info',
   showCancel = true,
+  confirmOnEnter = false,
   children,
 }: ConfirmModalProps) {
+  useEffect(() => {
+    if (!isOpen || !confirmOnEnter) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return; 
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        onConfirm();
+      } else if (e.key === 'Escape' && showCancel) {
+        e.preventDefault();
+        onCancel();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, confirmOnEnter, onConfirm, onCancel, showCancel]);
+
   if (!isOpen) return null;
 
   const handleConfirm = () => {

@@ -59,6 +59,7 @@ export function EditableName({ currentName, onNameChange, isEditing, onEditStart
   };
 
   const handleConfirm = async () => {
+    if (isLoading) return;
     const newName = inputValue.trim();
     setIsLoading(true);
     setError(null);
@@ -122,6 +123,7 @@ export function EditableName({ currentName, onNameChange, isEditing, onEditStart
         onCancel={handleCancel}
         confirmText={isLoading ? 'Updating...' : 'Confirm'}
         type="info"
+        confirmOnEnter
       >
         <div className="name-comparison">
           <div className="name-item">

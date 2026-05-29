@@ -5,7 +5,7 @@ import { updateDeveloperProductPrice, updateGamePass } from '../api/roblox';
 import { RobuxIcon } from './RobuxIcon';
 import { CustomDropdown } from './CustomDropdown';
 import { MAX_PRICE_ROBUX } from '../constants';
-import { sleep } from '../utils';
+import { sleep, applyMarketPricing } from '../utils';
 import '../styles/components/bulk-operations-modal.css';
 
 interface BulkOperationsModalProps {
@@ -44,6 +44,10 @@ export function BulkOperationsModal({
   const [results, setResults] = useState<OperationResult[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [useMarketPricing, setUseMarketPricing] = useState(false);
+  const isExpandedMode = window.location.search.includes('universeId');
+  const isPriceOperation = ['multiply', 'add', 'set'].includes(operationType);
+  const showMarketPricingToggle = isExpandedMode && isPriceOperation;
 
   if (!isOpen) return null;
 
@@ -55,6 +59,7 @@ export function BulkOperationsModal({
       setResults([]);
       setShowResults(false);
       setError(null);
+      setUseMarketPricing(false);
       onClose();
     }
   };
@@ -197,6 +202,25 @@ export function BulkOperationsModal({
     return null;
   };
 
+  // Builds the set-aware market-looking price for every for-sale selected asset,
+  // keyed by asset id. Shared by the preview and the apply step so both show and
+  // write the exact same charmed values (applyMarketPricing preserves order/slope,
+  // which can differ from charming a single price in isolation).
+  const buildMarketPriceMap = (): Map<number, number> => {
+    const ids: number[] = [];
+    const rawPrices: number[] = [];
+    for (const asset of selectedAssets) {
+      if (isAssetOffsale(asset)) continue;
+      const raw = calculateNewPrice(getAssetPrice(asset));
+      if (raw !== null) {
+        ids.push(getAssetId(asset));
+        rawPrices.push(raw);
+      }
+    }
+    const charmed = applyMarketPricing(rawPrices);
+    return new Map(ids.map((id, i) => [id, charmed[i]]));
+  };
+
   const handleApply = async () => {
     const validationError = validateOperation();
     if (validationError) {
@@ -208,6 +232,12 @@ export function BulkOperationsModal({
     setIsProcessing(true);
     setProgress({ current: 0, total: selectedAssets.length });
     const operationResults: (OperationResult | undefined)[] = new Array(selectedAssets.length);
+
+    // When the market-looking toggle is on, charm the result of the price operation.
+    // The charm is computed across the whole selection at once so it preserves the
+    // pricing slope/order between products (see applyMarketPricing).
+    const applyMarket = showMarketPricingToggle && useMarketPricing;
+    const marketPriceByAssetId = applyMarket ? buildMarketPriceMap() : null;
 
     const concurrency = 3;
     const delayBetweenBatches = 500;
@@ -227,7 +257,6 @@ export function BulkOperationsModal({
         try {
           const currentPrice = getAssetPrice(asset);
           const offsale = isAssetOffsale(asset);
-          const isPriceOperation = ['multiply', 'add', 'set'].includes(operationType);
           const isNameOperation = ['prefix', 'suffix', 'remove-prefix', 'remove-suffix'].includes(operationType);
 
           if (isPriceOperation && offsale) {
@@ -242,9 +271,13 @@ export function BulkOperationsModal({
             };
           }
 
-          const newPrice = isPriceOperation
+          let newPrice = isPriceOperation
             ? calculateNewPrice(currentPrice)
             : (offsale ? null : currentPrice);
+          if (marketPriceByAssetId) {
+            const charmed = marketPriceByAssetId.get(getAssetId(asset));
+            if (charmed !== undefined) newPrice = charmed;
+          }
           const newName = isNameOperation
             ? calculateNewName(getAssetName(asset))
             : getAssetName(asset);
@@ -323,9 +356,6 @@ export function BulkOperationsModal({
   const getOperationPreview = (): string => {
     if (selectedAssets.length === 0) return 'No items selected';
 
-
-    const isPriceOperation = ['multiply', 'add', 'set'].includes(operationType);
-
     if (isPriceOperation) {
       const forSaleAsset = selectedAssets.find(p => !isAssetOffsale(p));
       if (!forSaleAsset) {
@@ -333,7 +363,14 @@ export function BulkOperationsModal({
       }
       const currentPrice = getAssetPrice(forSaleAsset);
 
-      const newPrice = calculateNewPrice(currentPrice);
+      const rawNewPrice = calculateNewPrice(currentPrice);
+      let newPrice = rawNewPrice;
+      if (showMarketPricingToggle && useMarketPricing && rawNewPrice !== null) {
+        // Use the same set-aware charm the apply step uses, so the example matches
+        // exactly what will be written for this asset.
+        const charmed = buildMarketPriceMap().get(getAssetId(forSaleAsset));
+        if (charmed !== undefined) newPrice = charmed;
+      }
       const currentDisplay = currentPrice === null ? 'Offsale' : currentPrice.toString();
       const newDisplay = newPrice === null ? 'Offsale' : newPrice.toString();
       return `Example: ${currentDisplay} → ${newDisplay}`;
@@ -485,6 +522,28 @@ export function BulkOperationsModal({
                   </div>
                 )}
               </div>
+
+              {showMarketPricingToggle && (
+                <div className="market-pricing-toggle">
+                  <label className="toggle-switch" title="Round clean prices down to end in 9">
+                    <input
+                      type="checkbox"
+                      checked={useMarketPricing}
+                      onChange={(e) => {
+                        setUseMarketPricing(e.target.checked);
+                        setError(null);
+                      }}
+                    />
+                    <span className="toggle-slider"></span>
+                  </label>
+                  <div className="market-pricing-label">
+                    <span className="market-pricing-title">Use market-looking price</span>
+                    <span className="market-pricing-hint">
+                      Nudges clean rounded prices down to end in 9 (e.g. 50 → 49, 1000 → 999), keeping their order
+                    </span>
+                  </div>
+                </div>
+              )}
 
               <div className="operation-preview">
                 <strong>Preview</strong>

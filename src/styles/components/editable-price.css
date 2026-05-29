@@ -1,0 +1,162 @@
+.product-price.editable {
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-base);
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  overflow: visible;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  min-width: 80px;
+  box-sizing: border-box;
+}
+
+.product-price.editable:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.product-price.editable .edit-indicator {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: all var(--transition-base);
+  transform: translateX(-4px);
+}
+
+.product-price.editable:hover .edit-indicator {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.product-price.editing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  padding: 6px 10px;
+  min-width: 80px;
+  box-sizing: border-box;
+}
+
+.price-input {
+  width: 70px;
+  padding: 4px 6px;
+  border: 1px solid var(--accent-color);
+  border-radius: var(--radius-sm);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  outline: none;
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+  text-align: center;
+}
+
+.price-input::placeholder {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  font-style: italic;
+  color: var(--text-tertiary);
+}
+
+.price-input:focus {
+  background: var(--input-bg-focus);
+  box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2);
+}
+
+.price-input::-webkit-inner-spin-button,
+.price-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.price-error {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 8px 12px;
+  background: rgba(var(--error-color-rgb), 0.9);
+  color: white;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 20px;
+  border-radius: var(--radius-xl);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.price-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.price-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.price-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.price-value .robux-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.price-value.price-new {
+  color: var(--accent-color);
+}
+
+.price-arrow {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-2xl);
+  flex-shrink: 0;
+}
+
+.product-price.offsale,
+.product-price.editable.offsale {
+  color: var(--text-tertiary);
+  font-style: italic;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.product-price.editable.offsale:hover {
+  color: var(--text-secondary);
+}
+
+.offsale-text {
+  color: var(--text-tertiary);
+  font-style: italic;
+  font-weight: var(--font-weight-medium);
+}

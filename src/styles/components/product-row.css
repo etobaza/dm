@@ -1,0 +1,207 @@
+.product-row {
+  transition: background-color var(--transition-base);
+}
+
+.product-row:hover {
+  background-color: rgba(255, 255, 255, 0.02); 
+}
+
+.product-row.has-errors {
+  background-color: var(--error-bg-light);
+}
+
+.product-row.status-creating {
+  background-color: var(--info-bg-light);
+}
+
+.product-row.status-success {
+  background-color: var(--success-bg-light);
+}
+
+.product-row.status-error {
+  background-color: var(--error-bg-medium);
+}
+
+.row-number {
+  width: 50px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  padding: 12px var(--spacing-sm);
+}
+
+.field-cell {
+  padding: 8px;
+  position: relative;
+}
+
+.field-cell input,
+.field-cell textarea {
+  width: 100%;
+  padding: var(--spacing-sm) 10px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--font-size-lg);
+  font-family: inherit;
+  text-align: center;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.field-cell input:focus,
+.field-cell textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-focus);
+}
+
+.field-cell input.error,
+.field-cell textarea.error {
+  border-color: var(--error-text);
+}
+
+.field-cell input.error:focus,
+.field-cell textarea.error:focus {
+  box-shadow: var(--shadow-focus-error);
+}
+
+.field-cell textarea {
+  min-height: 40px;
+  max-height: 100px;
+  resize: vertical;
+}
+
+.field-cell input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.field-cell input[type="number"]::-webkit-outer-spin-button,
+.field-cell input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.error-text {
+  display: block;
+  color: var(--error-text);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+  line-height: var(--line-height-normal);
+}
+
+.toggle-cell {
+  text-align: center;
+  padding: 12px;
+}
+
+.toggle-switch-row {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.toggle-switch-row input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider-row {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color-medium);
+  border-radius: 20px;
+  transition: all var(--transition-base);
+}
+
+.toggle-slider-row::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--text-tertiary);
+  border-radius: 50%;
+  transition: all var(--transition-base);
+}
+
+.toggle-switch-row input:checked + .toggle-slider-row {
+  background-color: rgba(16, 185, 129, 0.2);
+  border-color: var(--accent-color);
+}
+
+.toggle-switch-row input:checked + .toggle-slider-row::before {
+  transform: translateX(16px);
+  background-color: var(--accent-color);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.toggle-switch-row:hover .toggle-slider-row {
+  border-color: var(--border-color-dark);
+}
+
+.toggle-switch-row input:checked:hover + .toggle-slider-row {
+  border-color: var(--accent-hover);
+}
+
+.toggle-switch-row input:disabled + .toggle-slider-row {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-cell {
+  width: 80px;
+  text-align: center;
+  padding: 12px 8px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+}
+
+.status-badge.creating {
+  background-color: var(--info-bg);
+  color: var(--info-color);
+}
+
+.status-badge.success {
+  background-color: var(--success-bg);
+  color: var(--accent-color);
+  font-size: var(--font-size-xl);
+}
+
+.status-badge.error {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+  cursor: help;
+  font-size: var(--font-size-xl);
+}
+
+.actions-cell {
+  width: 60px;
+  text-align: center;
+  padding: 8px;
+}
+
+.btn-remove-row:hover:not(:disabled) {
+  background-color: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+.btn-remove-row:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

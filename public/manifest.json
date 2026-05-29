@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "DevProduct Manager",
+  "version": "1.0.1",
+  "description": "Sauce up the monetization, man.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://apis.roblox.com/*",
+    "https://create.roblox.com/*",
+    "https://www.roblox.com/*",
+    "https://thumbnails.roblox.com/*",
+    "https://tr.rbxcdn.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -1,0 +1,57 @@
+.app-header-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent-color);
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 8px rgba(16, 185, 129, 0.5),
+      0 0 16px rgba(16, 185, 129, 0.3),
+      0 0 24px rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 12px rgba(16, 185, 129, 0.7),
+      0 0 24px rgba(16, 185, 129, 0.5),
+      0 0 36px rgba(16, 185, 129, 0.3),
+      0 0 48px rgba(16, 185, 129, 0.1);
+  }
+}
+
+@keyframes iconGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.6))
+            drop-shadow(0 0 8px rgba(16, 185, 129, 0.4))
+            drop-shadow(0 0 12px rgba(16, 185, 129, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.8))
+            drop-shadow(0 0 12px rgba(16, 185, 129, 0.6))
+            drop-shadow(0 0 18px rgba(16, 185, 129, 0.4))
+            drop-shadow(0 0 24px rgba(16, 185, 129, 0.2));
+  }
+}
+
+.create-icon {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-normal);
+}

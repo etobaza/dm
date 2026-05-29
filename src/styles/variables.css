@@ -1,0 +1,119 @@
+:root {
+  /* Colors */
+  --bg-color: #09090b;
+  --card-bg: rgba(24, 24, 27, 0.6);
+  --card-bg-hover: rgba(39, 39, 42, 0.8);
+  --modal-bg: #18181b;
+  --modal-backdrop: blur(8px);
+  
+  /* Typography */
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  
+  /* Accents */
+  --accent-color: #10b981;
+  --accent-color-rgb: 16, 185, 129;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --accent-glow: 0 0 20px rgba(16, 185, 129, 0.2);
+  --accent-hover: #059669;
+  
+  /* Status Colors */
+  --error-color: #ef4444;
+  --error-color-rgb: 239, 68, 68;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --error-text: #ef4444;
+  --error-border: rgba(239, 68, 68, 0.2);
+  --error-bg-light: rgba(239, 68, 68, 0.05);
+  --error-bg-medium: rgba(239, 68, 68, 0.08);
+  --error-bg-dark: rgba(239, 68, 68, 0.2);
+  
+  --success-color: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.1);
+  --success-bg-light: rgba(16, 185, 129, 0.05);
+  
+  --info-color: #3b82f6;
+  --info-color-rgb: 59, 130, 246;
+  --info-bg: rgba(59, 130, 246, 0.1);
+  --info-bg-light: rgba(59, 130, 246, 0.05);
+  --info-border: rgba(59, 130, 246, 0.2);
+  
+  /* Borders */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-light: rgba(255, 255, 255, 0.05);
+  --border-color-medium: rgba(255, 255, 255, 0.1);
+  --border-color-dark: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(0, 0, 0, 0.3);
+  --input-bg-focus: rgba(0, 0, 0, 0.4);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-glow: 0 0 15px rgba(16, 185, 129, 0.15), 0 0 3px rgba(16, 185, 129, 0.1);
+  --shadow-focus: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  --shadow-focus-error: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  
+  /* Glassmorphism */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+  --glass-backdrop: blur(12px);
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Typography Scale */
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-base: 12px;
+  --font-size-md: 13px;
+  --font-size-lg: 14px;
+  --font-size-xl: 16px;
+  --font-size-2xl: 18px;
+  --font-size-3xl: 20px;
+  --font-size-4xl: 24px;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-normal: -0.01em;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.08em;
+  
+  --line-height-tight: 1;
+  --line-height-normal: 1.2;
+  --line-height-relaxed: 1.6;
+  
+  /* Border Radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius: 12px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --transition-slower: 0.4s ease;
+  
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-pulse: cubic-bezier(0.4, 0, 0.6, 1);
+  
+  /* Animation Durations */
+  --duration-fast: 0.15s;
+  --duration-base: 0.2s;
+  --duration-slow: 0.3s;
+  --duration-slower: 0.4s;
+  --duration-pulse: 2s;
+}

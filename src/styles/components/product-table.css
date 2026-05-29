@@ -1,0 +1,277 @@
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  overflow-x: visible; 
+  padding: 14px 12px;
+  padding-bottom: 24px;
+  flex-grow: 1;
+  min-height: 0;
+  scroll-behavior: smooth;
+  
+  mask-image: linear-gradient(to bottom, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
+}
+
+.product-list-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-primary);
+}
+
+.header-checkbox:hover {
+  color: white;
+}
+
+.header-label {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-left: 8px; 
+}
+
+.header-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--border-color-medium);
+  border-radius: 6px;
+  position: relative;
+  transition: all var(--transition-fast);
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+}
+
+.header-checkbox input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em white;
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.header-checkbox input[type="checkbox"]:indeterminate::before {
+  clip-path: none;
+  box-shadow: none;
+  background-color: white;
+  width: 10px;
+  height: 2px;
+  transform: scale(1);
+}
+
+.header-checkbox input[type="checkbox"]:checked,
+.header-checkbox input[type="checkbox"]:indeterminate {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.header-checkbox input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.header-checkbox input[type="checkbox"]:hover {
+  border-color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-checkbox input[type="checkbox"]:checked:hover,
+.header-checkbox input[type="checkbox"]:indeterminate:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.bulk-actions {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: max-content;
+  max-width: 90vw;
+}
+
+.bulk-actions-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 6px 6px 16px;
+  background-color: rgba(24, 24, 27, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color-medium);
+  border-radius: 100px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.selection-info {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.bulk-actions-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-bulk-operations {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 100px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.01em;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-bulk-operations:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-clear-selection {
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-clear-selection:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.btn-copy-plain {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 100px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.01em;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-copy-plain svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.btn-copy-plain:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-copy-plain.copied {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--accent-color);
+}
+
+.btn-copy-plain.copied:hover {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.no-results, .empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 60px 20px;
+  font-size: var(--font-size-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius);
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 600px) {
+  .controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 20px;
+    padding: 24px 20px;
+    margin: -8px -20px 0;
+    align-content: start;
+    mask-image: none;
+    -webkit-mask-image: none;
+    overflow: visible;
+  }
+  
+  .product-list > * {
+    animation: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .product-list > * {
+    animation: fadeIn var(--duration-slower) ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
